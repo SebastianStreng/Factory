@@ -1,0 +1,51 @@
+class interface:
+    def nothing (self):
+        pass
+
+
+class koenig(interface):
+    def __init__(self, name, experience):
+        self.name = name
+        self.ex = experience
+
+    def attack(self):
+        print("Angriff von {}".format(self.name))
+
+    def defense (self):
+        print ("Verteidigung von {}".format(self.name))
+
+
+def getInstance ():
+    import random
+
+    KingArthur = koenig("King Arthur", random.randint(1, 100))
+    KingLudwig = koenig("King Ludwig", random.randint(1, 100))
+    # print(KingArthur.__class__)
+
+
+    print ("King Arthur:" , KingArthur.name, KingArthur.ex)
+    print ("King Luidwig:", KingLudwig.name, KingLudwig.ex)
+
+    if KingArthur.ex > KingLudwig.ex:
+        KingArthur.attack()
+        KingLudwig.defense()
+
+class factory:
+    @staticmethod
+    def get_king (type):
+        if type == "King Arthur":
+            return koenig
+        if type == "King Ludwig":
+            return koenig
+        assert  0, "Kein King vorhanden" + type
+
+
+
+
+
+if __name__ == '__main__':
+    Factory = factory()
+    king = factory.get_king("King Arthur")
+    king.nothing()
+    #getInstance()
+
